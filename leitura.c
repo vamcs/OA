@@ -88,6 +88,7 @@ void alteraPonteiroDaListaInvertida(int posicaoDoPrimeiro, node *chavesSec, int 
 		/*coloca -1 no atributo next do elemento chavesSec[posicaoDoDesordenado]*/
 		chavesSec[posicaoDoDesordenado].next = elementoComparado.next;
 		/*a tributo next do antigo ultimo elemento agora aponta para posicaoDoDesordenado*/
+		printf("posicaoDoDesordenado: %d\n", posicaoDoDesordenado);
 		elementoComparado.next = posicaoDoDesordenado;
 	}
 	/*adicionando o elemento entre o inicio e o fim*/
