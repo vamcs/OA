@@ -134,7 +134,7 @@ void destroyText(char** txt, int totalLines){
 	for(int i = 0; i < totalLines; i++){
 		free(txt[i]);
 	}
-	free(txt);
+	//free(txt);
 }
 
 char** createTxt(char* fileName, int* totalLines){
