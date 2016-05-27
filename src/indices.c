@@ -1,40 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "indices.h"
 
-typedef int bool;
-#define true 1
-#define false 0
-
-#define X 62  //Número de caracteres por linha das listas
 #define Y1 19 //Número inicial de linhas das listas1.txt
 #define Y2 22 //Número inicial de linhas das listas2.txt
-
-/*Estrutura da Fila de Próximos Índices Primários*/
-/*
-Guarda todas as ocorrências de índices que contêm o mesmo
-curso do índice inicial contido na lista de cursos.
-*/
-typedef struct queue *Queue;
-struct queue{
-	int index;
-	Queue next;
-};
-
-/*Estrutura da Lista Encadeada de Cursos*/
-/*
-Esta estrutura contém uma lista encadeada que contém o nome do curso,
-o índice de primeira ocorrência de um curso e ponteiros para uma fila 
-que contém todos as próximas ocorrências do curso em outros registros.
-*/
-typedef struct link *Link;
-struct link{
-	char course[2];
-	int index;
-	Queue first;
-	Queue last;
-	Link next;
-};
 
 /*
 Verifica se o curso lido já existe na lista de cursos.
@@ -113,7 +83,7 @@ int findNextIndex(Link list, char* course, int index){
 /*
  * Desalocação da Memória da Lista de Cursos.
  */
-void destroy(Link list){
+void destroyLink(Link list){
 	Link aux;
 	Queue aux2;
 	while(list != NULL){
@@ -128,48 +98,6 @@ void destroy(Link list){
 		list = aux;
 	}
 	list = NULL;
-}
-
-void destroyText(char** txt, int totalLines){
-	int i;
-	for(i = 0; i < totalLines; i++){
-		free(txt[i]);
-	}
-	free(txt);
-}
-
-char** createTxt(char* fileName, int* totalLines){
-	char aux;		//Variável auxiliar de leitura. Lê '\n' e garante a mudança de linha do ponteiro do arquivo.
-	int lineNumber;
-	
-	/*Inicialização do Arquivo de Entrada*/
-	FILE* input = fopen(fileName, "r");
-	while(input == NULL){
-		printf("Arquivo %s inexistente. Entre com o nome correto.\n", fileName);
-		scanf("%s", fileName);
-		input = fopen(fileName, "r");
-	}
-	
-	/*Contagem do número de linhas do arquivo de entrada.*/
-	while(!feof(input)){
-		aux = fgetc(input);
-		if(aux == '\n'){
-			*totalLines = *totalLines + 1;
-		}
-	}
-	
-	/*Volta o ponteiro ao início do arquivo de entrada.*/
-	rewind(input);
-	
-	char** txt = (char**)malloc(*totalLines * sizeof(*txt));
-	for(lineNumber = 0; lineNumber < *totalLines; lineNumber++){
-		txt[lineNumber] = (char*)calloc(1, X * sizeof(*txt[lineNumber]));	//As linhas possuem X (constante) caracteres.
-		fscanf(input, "%62s", txt[lineNumber]);		//Lê uma linha completa.
-		fscanf(input, "%c", &aux);			//Lê '\n'
-	}
-	
-	fclose(input);
-	return txt;
 }
 
 /*FUNÇÃO AINDA INCOMPLETA.
@@ -286,47 +214,4 @@ Link secondaryIndexes(char** txt, int totalLines){
 
 	fclose(output);
 	return coursesList;
-}
-
-
-int main(){
-	char file1Name[30], file2Name[30];
-	char** txt1;
-	char** txt2;
-	int totalLines1;
-	int totalLines2;
-	
-	/**************** Lista1.txt **************/
-	printf("Entre com o nome do arquivo 1 de entrada: ");
-	scanf("%s", file1Name);
-	
-	totalLines1 = 0;
-	txt1 = createTxt(file1Name, &totalLines1);
-	
-	Link l1 = secondaryIndexes(txt1, totalLines1);
-	
-	primaryIndexes(txt1, totalLines1, l1->next);
-	
-	destroyText(txt1, totalLines1);
-	destroy(l1->next);
-	free(l1);
-	l1 = NULL;
-	
-	/**************** Lista2.txt **************/
-	printf("Entre com o nome do arquivo 2 de entrada: ");
-	scanf("%s", file2Name);
-	
-	totalLines2 = 0;
-	txt2 = createTxt(file2Name, &totalLines2);
-
-	Link l2 = secondaryIndexes(txt2, totalLines2);
-	
-	primaryIndexes(txt2, totalLines2, l2->next);
-	
-	destroyText(txt2, totalLines2);
-	destroy(l2->next);
-	free(l2);
-	l2 = NULL;
-	
-	return 0;
 }
