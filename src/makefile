@@ -4,16 +4,16 @@ CFLAGS = -I$(IDIR) -Wall
 
 ODIR = ../obj
 
-_DEPS = indices.h
+_DEPS = indexes.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = indices.o insercao.o txt.o
+_OBJ = main.o indexes.o modify.o txt.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 $(ODIR)/%.o: %.c $(DEPS)
 	$(CC) -g -c -o $@ $< $(CFLAGS)
 
-indices: $(OBJ)
+indexes: $(OBJ)
 	$(CC) -g -o $@ $^ $(CFLAGS)
 	
 .PHONY: clean

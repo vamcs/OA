@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "indices.h"
+#include "indexes.h"
 
 #define Y1 19 //Número inicial de linhas das listas1.txt
 #define Y2 22 //Número inicial de linhas das listas2.txt

@@ -31,8 +31,8 @@ int main() {
 	FILE *lista1 = fopen("lista1.txt", "r");
 	FILE *lista2 = fopen("lista2.txt", "r");
 	FILE *lista12 = fopen("lista12.txt", "w");
-	char *registro1 = (char*)malloc(62 * sizeof(char));
-	char *registro2 = (char*)malloc(62 * sizeof(char));
+	char *registro1 = (char*)malloc(62 * sizeof(char) + 1);
+	char *registro2 = (char*)malloc(62 * sizeof(char) + 1);
 	/*lendo os primeiros registros*/
 	lerLista(lista1, registro1);
 	lerLista(lista2, registro2);

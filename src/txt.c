@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "indices.h"
+#include "indexes.h"
 
 char** createText(char* fileName, int* totalLines){
 	char aux;		//Variável auxiliar de leitura. Lê '\n' e garante a mudança de linha do ponteiro do arquivo.

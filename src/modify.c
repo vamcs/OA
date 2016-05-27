@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h> 
 #include <string.h>
-#include "indices.h"
+#include "indexes.h"
 
 void adicionaEspacos(char* registro) {
 	/*49 é a posicao do primeiro caracter do campo op*/
@@ -10,8 +10,7 @@ void adicionaEspacos(char* registro) {
 	}
 }
 
-void formatando(FILE* fp, char* matricula, char* nome, char* op, char* curso, char turma) {
-	char registro[62];
+void formatando(char* registro, char* matricula, char* nome, char* op, char* curso, char turma) {
 	strcpy(registro, matricula);
 	strcat(registro, " ");
 	strcat(registro, nome);
@@ -22,21 +21,17 @@ void formatando(FILE* fp, char* matricula, char* nome, char* op, char* curso, ch
 	strcat(registro, "       ");
 	registro[61] = turma;
 	registro[62] = '\0';
-	printf("%s", registro);
-	fprintf(fp, "%s\n", registro);
-
 }
 
-void modify() {
-	char nomeDoArquivo[30];
+void modify(char** txt, int* totalLines, char* fileName) {
 	char escolha;
 
 	printf("Deseja fazer inserção (i/I), remoção (r/R) ou alteração (a/A)?\n");
 	scanf(" %c", &escolha);
 	getchar();
 
-	printf("Informe o nome do arquivo de registros que deseja manipular\n");
-	scanf("%[^\n]s", nomeDoArquivo);
+	//printf("Informe o nome do arquivo de registros que deseja manipular\n");
+	//scanf("%[^\n]s", nomeDoArquivo);
 
 	if (escolha == 'i' || escolha == 'I') {
 
@@ -45,10 +40,10 @@ void modify() {
 		char op[2];
 		char curso[2];
 		char turma;
+		char novo_registro[62];
+		//FILE *fp;
 
-		FILE *fp;
-
-		fp = fopen(nomeDoArquivo, "a");
+		//fp = fopen(nomeDoArquivo, "a");
 
 		printf("Qual a matricula ?\n");
 		scanf(" %6[^\n]s", matricula);
@@ -69,64 +64,63 @@ void modify() {
 		printf("Qual a turma\n");
 		scanf(" %c", &turma);
 
-		formatando(fp, matricula, nome, op, curso, turma);
+		formatando(novo_registro, matricula, nome, op, curso, turma);
 
-		fclose(fp);
+		*totalLines = *totalLines + 1;
+
+		char** ptr = (char**)realloc(txt, *totalLines * sizeof(char*));
+		if(ptr != NULL){
+			txt = ptr;
+		}
+		txt[*totalLines - 1] = (char*)calloc(1, X * sizeof(char) + 1);
+
+		strcpy(txt[*totalLines - 1], novo_registro);
 	}
 
 	else if(escolha == 'r' || escolha == 'R') {
 		char** txt;
 		char* temp;
-		int totalLines = 0;
 		int NRR, option, i;
-
-		txt = createText(nomeDoArquivo, &totalLines);
 
 		printf("Qual linha deve ser deletada?\n");
 		scanf("%d", &NRR);
-		while(NRR > totalLines) {
-			printf("Número além do limite. Máximo %d linhas. Entre com um novo valor.\n", totalLines);
+		while(NRR > *totalLines) {
+			printf("Número além do limite. Máximo %d linhas. Entre com um novo valor.\n", *totalLines);
 			scanf("%d", &NRR);
 		}
 
 		NRR--;
 		temp = txt[NRR];
 		
-		if(NRR == totalLines-1) {		//Remoção do último registro
-			totalLines--;
-			txt = (char**)realloc(txt, totalLines * sizeof(char*));
+		if(NRR == *totalLines-1) {		//Remoção do último registro
+			*totalLines = *totalLines - 1;
+			txt = (char**)realloc(txt, *totalLines * sizeof(char*));
 		}
 		else {						//Remoção de qualquer outro acima.
-			for(i = NRR; i < totalLines-1; i++){
+			for(i = NRR; i < *totalLines-1; i++){
 				txt[i] = txt[i+1];
 			}
 			free(temp);
-			totalLines--;
-			txt = (char**)realloc(txt, totalLines * sizeof(char*));
+			*totalLines = *totalLines - 1;
+			txt = (char**)realloc(txt, *totalLines * sizeof(char*));
 		}
 
-		saveText(nomeDoArquivo, txt, totalLines);
-
-		destroyText(txt, totalLines);
+		saveText(fileName, txt, *totalLines);
 	}
 
 	else if(escolha == 'a' || escolha == 'A') {
 		char** txt;
-		int totalLines = 0;
 		int NRR, i, option;
-
 		char matricula[6];
 		char nome[40];
 		char op[2];
 		char curso[2];
 		char turma;
 
-		txt = createText(nomeDoArquivo, &totalLines);
-
 		printf("Qual linha deve ser alterada?\n");
 		scanf("%d", &NRR);
-		while(NRR > totalLines) {
-			printf("Número além do limite. Máximo %d linhas. Entre com um novo valor.\n", totalLines);
+		while(NRR > *totalLines) {
+			printf("Número além do limite. Máximo %d linhas. Entre com um novo valor.\n", *totalLines);
 			scanf("%d", &NRR);
 		}
 		NRR--;
@@ -177,8 +171,6 @@ void modify() {
 				break;
 		}
 
-		saveText(nomeDoArquivo, txt, totalLines);
-
-		destroyText(txt, totalLines);
+		saveText(fileName, txt, *totalLines);
 	}
 }

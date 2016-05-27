@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "indices.h"
+#include "indexes.h"
 
 int main(){
 	char file1Name[30], file2Name[30];
@@ -19,6 +19,8 @@ int main(){
 	Link l1 = secondaryIndexes(txt1, totalLines1);
 	
 	primaryIndexes(txt1, totalLines1, l1->next);
+
+	modify(txt1, &totalLines1, file1Name);
 	
 	destroyText(txt1, totalLines1);
 	destroyLink(l1->next);
@@ -36,6 +38,8 @@ int main(){
 	
 	primaryIndexes(txt2, totalLines2, l2->next);
 	
+	modify(txt2, &totalLines2, file2Name);
+
 	destroyText(txt2, totalLines2);
 	destroyLink(l2->next);
 	free(l2);
