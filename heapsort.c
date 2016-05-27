@@ -3,59 +3,58 @@
 #include <string.h>
 
 void troca(char** array, int indice1, int indice2) {
-	char aux[30];
-	strcpy(aux, array[indice1]);
-	strcpy(array[indice1], array[indice2]);
-	strcpy(array[indice2], aux);
+	char *aux;
+	printf("\n");
+	printf("%d %d\n", indice1, indice2);
+
+	printf("%s\n", array[indice1]);
+	printf("%s\n", array[indice2]);
+	aux = array[indice1];
+	printf("aux	%s\n", aux);
+	array[indice1] = array[indice2];
+	printf("indice1: %s\n", array[indice1]);
+	array[indice2] = aux;
+	printf("indice2 %s\n", array[indice2]);
+	printf("\n");
 }
-
-void heapify (char** array, int p) {
-	p--;
-	char *L = array[2*p];
-	char *R = array[2*p +1];
-	int maior;
-	printf("p:%d\n", p);
-	
-	if (L != NULL && strcmp(L, R) > 0) {
-		printf("KK\n");
-				maior = 2*p;
-	}
-	else {
-		printf("GG\n");
-		maior = p;
-	}
-
-	if (R != NULL && strcmp(R, array[maior])) {
-
-		maior = 2*p + 1;
-	}
-
-	if (maior != p) {
-		troca(array, p , maior);
-
-		heapify(array, maior);
-	}
-
-}
-
 
 void buildHeap(char** array, int length) {
-	for (int p = length	/2; p >= 0; p--) {
-		heapify(array, p);
+	int i, j;
+	for (i = 0; i < length; i++) {
+		j = i+1;
+		printf("j:%dj/2:%d\n", j, j/2);
 
+		while(j > 1 && strcmp(array[j/2], array[j]) < 0) {
+			printf("trocou\n");
+			troca(array, j/2, j);
+			j = j/2;
+		}
 	}
 }
 
-void mHeapsort(char** array, int length) {
-	buildHeap(array, length);
-	printf("OI\n");
-	for (int p = length; p >= 2; p--) {
-		troca(array, 0, p);
-
-		length--;
-
-		heapify(array, 0);
+void downHeap(char** array, int length) {
+	int j = 1;
+	while(j <= length) {
+		if (j < length && strcmp(array[j], array[j+1]) < 0) {
+			j++;
+		}
+		if (strcmp(array[j/2], array[j]) >= 0) {
+			break;
+		}
+		troca(array, j/2, j);
+		j = j*2;
 	}
+}
+
+
+void mHeapsort(char** array, int length) {
+	int n;
+	printf("length:%d\n", length);
+   	buildHeap (array, length);
+   for (n = length -1; n >= 2; --n) {
+      troca(array, 0, n);
+      downHeap(array, n-2);
+   }
 
 }
 
