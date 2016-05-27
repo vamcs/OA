@@ -19,8 +19,11 @@ void excluindo(char* chavePrimaria) {
 char* formatando(FILE* fp, char* matricula, char* nome, char* op, char* curso, char* turma) {
 	char registro[62];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	strcpy(registro, matricula);
 =======
+=======
+>>>>>>> 871dceae874300d0a4d17aa3ef50116075dc873d
 	printf("op: %s\n", op);
 	strcat(registro, matricula);
 >>>>>>> 871dceae874300d0a4d17aa3ef50116075dc873d
@@ -40,6 +43,9 @@ char* formatando(FILE* fp, char* matricula, char* nome, char* op, char* curso, c
 	strcat(registro, " ");
 	strcat(registro, turma);
 	printf("registro: %s\n", registro);
+<<<<<<< HEAD
+>>>>>>> 871dceae874300d0a4d17aa3ef50116075dc873d
+=======
 >>>>>>> 871dceae874300d0a4d17aa3ef50116075dc873d
 
 	return registro;
@@ -57,6 +63,7 @@ int main() {
 	char turma[1];
 	char *registro = (char*)malloc(62 * sizeof(char));
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	printf("Informe o nome do arquivo de registros que deseja manipular\n");
 	scanf("%[^\n]s", nomeDoArquivo);
@@ -87,6 +94,65 @@ int main() {
 		scanf(" %c", &turma);
 
 		formatando(fp, matricula, nome, op, curso, turma);
+=======
+	/*
+	fp = fopen(nomeDoArquivo, "r+");
+	while(fp == NULL) {
+		printf("Informe o nome do arquivo de registros que deseja manipular\n");
+		scanf("%s", nomeDoArquivo);
+		fp = fopen(nomeDoArquivo, "r+");
+	}
+	*/
+
+	while (escolha != 'i' && escolha != 'I' && escolha != 'r' &&
+		   escolha != 'R' && escolha != 'a' && escolha != 'A' &&
+		   escolha != 'Q' && escolha != 'q') {
+
+		printf("Deseja fazer insercao (i/I) ou remocao(r/R) ?\n");
+		scanf("%c", &escolha);
+
+		if (escolha == 'Q' || escolha == 'q') {
+			break;
+		}
+
+		if (escolha == 'i' || escolha == 'I') {
+			printf("Qual a matricula ?\n");
+			getchar();
+			scanf("%s", matricula);
+			printf("%s\n", matricula);
+			printf("Qual o nome ?\n");
+			getchar();
+			scanf("%[^\n]s", nome);
+			printf("%s\n", nome);
+			printf("Qual a op ?\n");
+			getchar();
+			scanf("%s", op);
+			printf("OP: %s\n", op);
+			printf("Qual o curso\n");
+			getchar();
+			scanf("%s", curso);
+			printf("Qual a turma\n");
+			getchar();
+			scanf("%s", turma);
+
+			registro = formatando(fp, matricula, nome, op, curso, turma);
+
+			escolha = 'z';
+
+		}
+		else {
+			if (escolha == 'r' || escolha == 'R') {
+				printf("Digite a chave primaria do registro que deseja excluir, isto e, \n
+				a matricula concatenada ao nome sem espacos\n");
+				for ()
+			}
+
+			if (escolha == 'a' || escolha == 'A') {
+
+			}
+		}
+		printf("\nSe desejar parar a manipulacao do arquivo digite Q\n");
+>>>>>>> 871dceae874300d0a4d17aa3ef50116075dc873d
 =======
 	/*
 	fp = fopen(nomeDoArquivo, "r+");
