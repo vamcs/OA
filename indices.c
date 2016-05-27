@@ -81,7 +81,7 @@ da lista.
 */
 Link insertLink(Link list, char* course, int lineNumber){
 	
-	Link new = (Link)malloc(sizeof(*new));
+	Link new = (Link)calloc(1,sizeof(*new));
 	
 	strcpy(new->course, course);
 	
@@ -163,8 +163,8 @@ char** createTxt(char* fileName, int* totalLines){
 	
 	char** txt = (char**)malloc(*totalLines * sizeof(*txt));
 	for(lineNumber = 0; lineNumber < *totalLines; lineNumber++){
-		txt[lineNumber] = (char*)malloc(X * sizeof(*txt[lineNumber]));	//As linhas possuem X (constante) caracteres.
-		fscanf(input, "%[^\n]s", txt[lineNumber]);		//Lê uma linha completa.
+		txt[lineNumber] = (char*)calloc(1, X * sizeof(*txt[lineNumber]));	//As linhas possuem X (constante) caracteres.
+		fscanf(input, "%62s", txt[lineNumber]);		//Lê uma linha completa.
 		fscanf(input, "%c", &aux);			//Lê '\n'
 	}
 	
