@@ -131,14 +131,16 @@ void destroy(Link list){
 }
 
 void destroyText(char** txt, int totalLines){
-	for(int i = 0; i < totalLines; i++){
+	int i;
+	for(i = 0; i < totalLines; i++){
 		free(txt[i]);
 	}
-	//free(txt);
+	free(txt);
 }
 
 char** createTxt(char* fileName, int* totalLines){
 	char aux;		//Variável auxiliar de leitura. Lê '\n' e garante a mudança de linha do ponteiro do arquivo.
+	int lineNumber;
 	
 	/*Inicialização do Arquivo de Entrada*/
 	FILE* input = fopen(fileName, "r");
@@ -159,9 +161,9 @@ char** createTxt(char* fileName, int* totalLines){
 	/*Volta o ponteiro ao início do arquivo de entrada.*/
 	rewind(input);
 	
-	char** txt = (char**)malloc(*totalLines * sizeof(char*));
-	for(int lineNumber = 0; lineNumber < *totalLines; lineNumber++){
-		txt[lineNumber] = (char*)malloc(X * sizeof(char));	//As linhas possuem X (constante) caracteres.
+	char** txt = (char**)malloc(*totalLines * sizeof(*txt));
+	for(lineNumber = 0; lineNumber < *totalLines; lineNumber++){
+		txt[lineNumber] = (char*)malloc(X * sizeof(*txt[lineNumber]));	//As linhas possuem X (constante) caracteres.
 		fscanf(input, "%[^\n]s", txt[lineNumber]);		//Lê uma linha completa.
 		fscanf(input, "%c", &aux);			//Lê '\n'
 	}
