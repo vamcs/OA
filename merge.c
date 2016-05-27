@@ -6,11 +6,6 @@
 static bool acabou1delas = false;
 static bool existeRegistro = true;
 
-static void changeShared(void)
-{
-	existeRegistro = false;
-}
-
 
 void lerLista(FILE *fp, char* registro) {
 	char *string_MAX = {"ZZZ"};
@@ -22,10 +17,8 @@ void lerLista(FILE *fp, char* registro) {
 		 *chave e a chave do outro arquivo a outra sempre será menor*/
 		strcpy(registro, string_MAX);
 		if (acabou1delas) {
-			changeShared();
-			printf("Naoexiste\n");
+			existeRegistro = false;
 		}
-		printf("uma acabou\n");
 		acabou1delas = true;
 	}
 }
@@ -35,8 +28,6 @@ void escreveNoArquivo(FILE* fp, char *registro) {
 }
 
 int main() {
-	int i = 0;
-	bool existeRegistro = true;
 	FILE *lista1 = fopen("lista1.txt", "r");
 	FILE *lista2 = fopen("lista2.txt", "r");
 	FILE *lista12 = fopen("lista12.txt", "w");
@@ -46,7 +37,7 @@ int main() {
 	lerLista(lista1, registro1);
 	lerLista(lista2, registro2);
 
-	while(existeRegistro && i < 10) {
+	while(existeRegistro) {
 
 		if (strcmp(registro1, registro2) < 0) {
 			/*caso positivo, significa que a chave do registro da lista 1 é menor*/
@@ -64,18 +55,11 @@ int main() {
 			/*caso os dois registros sejam iguais*/
 			else {
 				escreveNoArquivo(lista12, registro1);
-							printf("%s\n", registro1);
+				printf("%s\n", registro1);
 				lerLista(lista1, registro1);
 				lerLista(lista2, registro2);
 			}
 		}
-		if (existeRegistro) {
-			printf("S\n");
-		}
-		else {
-			printf("N\n");
-		}
-		i++;
 	}
 	fclose(lista1);
 	fclose(lista2);
