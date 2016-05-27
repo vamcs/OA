@@ -13,18 +13,18 @@ void adicionaEspacos(char* registro) {
 
 void formatando(FILE* fp, char* matricula, char* nome, char* op, char* curso, char turma) {
 	char registro[62];
-	strcat(registro, matricula);
+	strcpy(registro, matricula);
 	strcat(registro, " ");
 	strcat(registro, nome);
 	adicionaEspacos(registro);
 	strcat(registro, op);
-	strcat(registro, " ");
+	strcat(registro, "  ");
 	strcat(registro, curso);
-	strcat(registro, " ");
-	int length = strlen(registro);
-	registro[length] = turma;
-	registro[length +1] = '\0';
-	printf("%s\n", registro);
+	strcat(registro, "       ");
+	registro[61] = turma;
+	registro[62] = '\0';
+	printf("%s", registro);
+	fprintf(fp, "%s\n", registro);
 
 }
 
@@ -39,31 +39,37 @@ int main() {
 	char curso[2];
 	char turma;
 
-	fp = fopen(nomeDoArquivo, "r+");
-	while(fp == NULL) {
-		printf("Informe o nome do arquivo de registros que deseja manipular\n");
-		scanf("%s", nomeDoArquivo);
-			fp = fopen(nomeDoArquivo, "r+");
-	}
+	printf("Informe o nome do arquivo de registros que deseja manipular\n");
+	scanf("%[^\n]s", nomeDoArquivo);
+	fp = fopen(nomeDoArquivo, "a");
 
 	printf("Deseja fazer insercao (i/I) ou remocao(r/R) ?\n");
-	scanf("%c", &escolha);
+	scanf(" %c", &escolha);
 	getchar();
 
 	if (escolha == 'i' || escolha == 'I') {
 		printf("Qual a matricula ?\n");
-		scanf("%s", matricula);
+		scanf(" %6[^\n]s", matricula);
+		getchar();
+		//fgets(matricula, 6, stdin);
 		printf("Qual o nome ?\n");
-		scanf("%s", nome);
+		scanf(" %40[^\n]s", nome);
+		getchar();
+		//fgets(nome, 40, stdin);
 		printf("Qual a op ?\n");
-		scanf("%s", op);
+		scanf(" %2[^\n]s", op);
+		getchar();
+		//fgets(op, 2, stdin);
 		printf("Qual o curso\n");
-		scanf("%s", curso);
+		scanf(" %2[^\n]s", curso);
+		getchar();
+		//fgets(curso, 2, stdin);
 		printf("Qual a turma\n");
-		scanf("%c", &turma);
+		scanf(" %c", &turma);
 
 		formatando(fp, matricula, nome, op, curso, turma);
 	}
 
+	fclose(fp);
 	return 0;
 }
