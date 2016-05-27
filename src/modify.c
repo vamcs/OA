@@ -68,10 +68,8 @@ void modify(char** txt, int* totalLines, char* fileName) {
 
 		*totalLines = *totalLines + 1;
 
-		char** ptr = (char**)realloc(txt, *totalLines * sizeof(char*));
-		if(ptr != NULL){
-			txt = ptr;
-		}
+		txt = (char**)realloc(txt, *totalLines * sizeof(char*));
+		
 		txt[*totalLines - 1] = (char*)calloc(1, X * sizeof(char) + 1);
 
 		strcpy(txt[*totalLines - 1], novo_registro);
