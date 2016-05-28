@@ -1,0 +1,12 @@
+Nomes:
+- Victor Augusto Machado Clemente Souza - 12/0023474
+- William Gustavo Queiroz Simião - 13/0138002
+
+Instruções de Compilação:
+É necessário utilizar o programa em um ambiente linux (testado em Ubuntu 16.04) através do uso de makefile:
+	- No diretório /src/ executar "make" no terminal.
+	- Para executar o programa: "./indexes"
+	- É necessário que os arquivos de entrada sigam o padrão de "lista1.txt" e "lista2.txt" encontrados na raiz do .zip e que estejam com finais linha padrão Unix.
+
+Informação:
+Para verificar a saída do programa, abra os arquivos gerados ou verifique os arquivos de entrada. Apenas a rotina "merge" é impressa na tela.
