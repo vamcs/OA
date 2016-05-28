@@ -103,7 +103,7 @@ void destroyLink(Link list){
 /*FUNÇÃO AINDA INCOMPLETA.
  *Entretanto, já imprime os índices primários.
  */
-void primaryIndexes(char** txt, int totalLines, Link list){
+void primaryIndexes(char** txt, int totalLines, Link list, NRR nrr, char* outputName){
 	int i = 0;		//Variável de navegação da string que contém uma linha inteira do arquivo de entrada.
 	int j = 0;		//Variável de navegação da string da chave primária.
 	int next;		//Armazena o próximo índice para o registro com a mesma chave secundária.
@@ -111,12 +111,9 @@ void primaryIndexes(char** txt, int totalLines, Link list){
 	int lineNumber;	//Esta variável indica o número da linha atual lida nos arquivos lista1.txt ou lista2.txt.
 	char primaryKey[30];	//String que contém a CHAVE PRIMÁRIA concatenada com 30 caracteres.
 	char course[2];	//Armazena o curso lido por line nas posições 52 e 53.
-	char outputName[20];	//String do nome do arquivo de saída output.
 	
 	
 	/*Inicialização dos Arquivos de Saída*/
-	printf("Entre com o nome do arquivo de saida dos indices primarios da mesma lista: ");
-	scanf("%s", outputName);
 	FILE* output = fopen(outputName, "w");
 	
 	//Criação do Arquivo de Índices Primários do Arquivo lista1.txt
@@ -145,7 +142,7 @@ void primaryIndexes(char** txt, int totalLines, Link list){
 		
 		next = findNextIndex(list, course, lineNumber);
 		
-		fprintf(output, "%d\t%s\t%d\t%d\n", lineNumber, primaryKey, lineNumber, next);	//Imprime: "índicePrimário chavePrimária NRR" no arquivo de saída.
+		fprintf(output, "%d\t%s\t%d\t%d\n", lineNumber, primaryKey, nrr[lineNumber].NRR, next);	//Imprime: "índicePrimário chavePrimária NRR proximoIndice" no arquivo de saída.
 		i = 0;												//Reinicia variáveis de navegação e flag.
 		j = 0;
 		flag = 0;
@@ -159,15 +156,12 @@ void primaryIndexes(char** txt, int totalLines, Link list){
  *TODO: Estender a criação dos índices para o arquivo lista2.txt e imprimir nos arquivos de saída.
  *      Verificar integração com "primaryIndexes".
  */
-Link secondaryIndexes(char** txt, int totalLines){
+Link secondaryIndexes(char** txt, int totalLines, char* outputName){
 	Link aux;
 	char course[2];
 	int lineNumber;
-	char outputName[20];
 	
 	/*Inicialização do Arquivo de Saída*/
-	printf("Entre com o nome do arquivo de saida dos indices secundarios: ");
-	scanf("%s", outputName);
 	FILE* output = fopen(outputName, "w");
 	
 	/*Inicialização da Lista Encadeada de Cursos*/

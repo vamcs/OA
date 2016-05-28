@@ -28,16 +28,16 @@ void formatando(FILE* fp, char* matricula, char* nome, char* op, char* curso, ch
 
 }
 
-void modify() {
-	char nomeDoArquivo[30];
+void modify(char* nomeDoArquivo) {
+	// char nomeDoArquivo[30];
 	char escolha;
 
 	printf("Deseja fazer inserção (i/I), remoção (r/R) ou alteração (a/A)?\n");
 	scanf(" %c", &escolha);
 	getchar();
 
-	printf("Informe o nome do arquivo de registros que deseja manipular\n");
-	scanf("%[^\n]s", nomeDoArquivo);
+	// printf("Informe o nome do arquivo de registros que deseja manipular\n");
+	// scanf("%[^\n]s", nomeDoArquivo);
 
 	if (escolha == 'i' || escolha == 'I') {
 

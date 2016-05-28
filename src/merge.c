@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h> 
 #include <string.h>
+#include "indexes.h"
 
 static bool acabou1delas = false;
 static bool existeRegistro = true;
@@ -27,7 +27,7 @@ void escreveNoArquivo(FILE* fp, char *registro) {
 	fprintf(fp, "%s\n", registro);
 }
 
-int main() {
+void merge() {
 	FILE *lista1 = fopen("lista1.txt", "r");
 	FILE *lista2 = fopen("lista2.txt", "r");
 	FILE *lista12 = fopen("lista12.txt", "w");
@@ -66,5 +66,4 @@ int main() {
 	fclose(lista12);
 	free(registro1);
 	free(registro2);
-	return 0;
 }

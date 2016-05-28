@@ -32,6 +32,13 @@ struct link{
 	Link next;
 };
 
+/*Estrutura para guardar o NRR original*/
+typedef struct nrr *NRR;
+struct nrr{
+	char matricula[6];
+	int NRR;
+};
+
 /*Funções*/
 bool checkCourse(Link, char*);
 void insertQueue(Link, char*, int);
@@ -43,9 +50,23 @@ char** createText(char*, int*);
 void saveText(char*, char**, int);
 void destroyText(char**, int);
 
-void primaryIndexes(char**, int, Link);
-Link secondaryIndexes(char**, int);
+void primaryIndexes(char**, int, Link, NRR, char*);
+Link secondaryIndexes(char**, int, char*);
 
 void formatando(FILE*, char*, char*, char*, char*, char);
 void adicionaEspacos(char*);
-void modify();
+void modify(char*);
+
+void merge();
+void escreveNoArquivo(FILE*, char*);
+void lerLista(FILE*, char*);
+
+void mHeapsort (char**, int);
+void downheap (char**, int, int);
+int max (char**, int, int, int, int);
+void swap(char**, int, int);
+
+void nrrHeapsort (NRR, int);
+void nrrdownheap (NRR, int, int);
+int nrrmax (NRR, int, int, int, int);
+void nrrswap(NRR, int, int);

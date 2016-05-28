@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "indexes.h"
 
 /*Troca a posição das strings com os indices indice1 e indice2*/
 void swap(char** a, int indice1, int indice2) {
@@ -47,30 +48,30 @@ void mHeapsort (char** a, int length) {
     }
 }
  
-int main () {
-	int i, nLinhas = 3;
-	char a[30] = {"044312LeonardoNunesdeSouza    "};
-	char b[30] = {"031272AndrezaPollyanadaSilva  "};
-	char c[30] = {"035830RogerioAugustodeCastro  "};
-	char **linhas = (char**)malloc(nLinhas * sizeof(char*));
-	linhas[0] = a;
-	linhas[1] = b;
-	linhas[2] = c;
+// int main () {
+// 	int i, nLinhas = 3;
+// 	char a[30] = {"044312LeonardoNunesdeSouza    "};
+// 	char b[30] = {"031272AndrezaPollyanadaSilva  "};
+// 	char c[30] = {"035830RogerioAugustodeCastro  "};
+// 	char **linhas = (char**)malloc(nLinhas * sizeof(char*));
+// 	linhas[0] = a;
+// 	linhas[1] = b;
+// 	linhas[2] = c;
 
-	printf("Antes da ordenacao\n");
-	for (i = 0; i < nLinhas; ++i)
-	{
-		printf("%s\n", linhas[i]);
-	}
-	printf("\n");
+// 	printf("Antes da ordenacao\n");
+// 	for (i = 0; i < nLinhas; ++i)
+// 	{
+// 		printf("%s\n", linhas[i]);
+// 	}
+// 	printf("\n");
 	
-	mHeapsort(linhas, nLinhas);
+// 	mHeapsort(linhas, nLinhas);
 
-	printf("depois da ordencao\n");
-	for (i = 0; i < nLinhas; ++i)
-	{
-		printf("%s\n", linhas[i]);
-	}
-	return 0;
-}
+// 	printf("depois da ordencao\n");
+// 	for (i = 0; i < nLinhas; ++i)
+// 	{
+// 		printf("%s\n", linhas[i]);
+// 	}
+// 	return 0;
+// }
 

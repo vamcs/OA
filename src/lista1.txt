@@ -17,4 +17,4 @@
 046946 Vitor Bruno Jacintho de Almeida          34  EC       A
 046956 Vitor Gouvea Franchi                     34  EC       A
 046961 Vitor Paulo Villarino Pinto              32  EC       A
-123456 Victor Augusto Machado Clemente Souza    10  EC       A
+000001 Joao Nonato                              10  BN       C
