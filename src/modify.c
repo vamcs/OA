@@ -147,10 +147,11 @@ void modify(char* nomeDoArquivo) {
 				printf("Entre com o novo nome: ");
 				scanf(" %40[^\n]s", nome);
 				getchar();
-				for(i = 7; i < strlen(nome); i++) txt[NRR][i] = nome[i];
+				for(i = 7; i < strlen(nome) + 7; i++) txt[NRR][i] = nome[i-7];
 				if(strlen(nome) < 40){
 					while(i < 47){
 						txt[NRR][i] = ' ';
+						i++;
 					}
 				}
 				break;

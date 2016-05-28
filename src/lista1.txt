@@ -1,9 +1,8 @@
-024312 Leonardo Nunes de Souza                  32  EC       A
-031272 Andreza Pollyana da Silva                32  EC       A
+123456 Leonardo Nunes de Souza                  32  EC       A
+031272 Andreza Pollyana da Silva                99  EC       A
 035830 Rogerio Augusto de Castro Neves          37  EC       A
-041881 Ana Luisa Costa Miguel                   34  CC       A
-042290 Bruno Filipe Milare de Macedo            34  EC       A
-042780 Daniel Schowantz Silva                   34  EC       A
+042290 Felipe Bruno Milare de Macedo            34  ER       A
+042780 Daniel Schowantz Silva                   34  EC       O
 042865 Danilo Silva Marshall                    35  CC       A
 043217 Erikita Regina Campos de Almeida         34  CC       A
 043341 Fabricio Nallin Violin                   34  EC       A
@@ -17,3 +16,4 @@
 046946 Vitor Bruno Jacintho de Almeida          34  EC       A
 046956 Vitor Gouvea Franchi                     34  EC       A
 046961 Vitor Paulo Villarino Pinto              32  EC       A
+005656 Trabalho de OA                           99  CC       A
