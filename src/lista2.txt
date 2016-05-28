@@ -1,7 +1,7 @@
 015511 Angelo Luiz Rocatto Junior               34  CC       B
 031147 Anderson Silva Bezerra                   34  EC       B
 031200 Andre Luiz Silva Bezerra                 34  CC       B
-032725 Fellipe Choi                             32  CC       B
+032725 Fellipe Choi                             32  CC       Z
 033282 Henrique Elias da Silva                  34  CC       B
 037396 Hugo Torres de Carvalho Brandao          34  CC       B
 042348 Bruno Teles                              34  EC       B

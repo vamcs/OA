@@ -46,6 +46,6 @@ void destroyText(char**, int);
 void primaryIndexes(char**, int, Link);
 Link secondaryIndexes(char**, int);
 
-void formatando(char*, char*, char*, char*, char*, char);
+void formatando(FILE*, char*, char*, char*, char*, char);
 void adicionaEspacos(char*);
-void modify(char**, int*, char*);
+void modify();

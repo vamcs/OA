@@ -15,17 +15,18 @@ int main(){
 	
 	totalLines1 = 0;
 	txt1 = createText(file1Name, &totalLines1);
-	
+
 	Link l1 = secondaryIndexes(txt1, totalLines1);
 	
 	primaryIndexes(txt1, totalLines1, l1->next);
 
-	modify(txt1, &totalLines1, file1Name);
-	
 	destroyText(txt1, totalLines1);
 	destroyLink(l1->next);
 	free(l1);
 	l1 = NULL;
+
+	modify();
+	
 	
 	/**************** Lista2.txt **************/
 	printf("Entre com o nome do arquivo 2 de entrada: ");
@@ -37,13 +38,13 @@ int main(){
 	Link l2 = secondaryIndexes(txt2, totalLines2);
 	
 	primaryIndexes(txt2, totalLines2, l2->next);
-	
-	modify(txt2, &totalLines2, file2Name);
 
 	destroyText(txt2, totalLines2);
 	destroyLink(l2->next);
 	free(l2);
 	l2 = NULL;
+
+	modify();
 	
 	return 0;
 }
